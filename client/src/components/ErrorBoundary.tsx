@@ -1,62 +1,43 @@
-import { cn } from "@/lib/utils";
-import { AlertTriangle, RotateCcw } from "lucide-react";
-import { Component, ReactNode } from "react";
+/* Design direction: Resilient terminal state with calm recovery actions and explicit hierarchy. */
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import ErrorOutlineRounded from '@mui/icons-material/ErrorOutlineRounded';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 
-interface Props {
-  children: ReactNode;
-}
+type ErrorBoundaryProps = { children: ReactNode };
+type ErrorBoundaryState = { failed: boolean };
 
-interface State {
-  hasError: boolean;
-  error: Error | null;
-}
+export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  state: ErrorBoundaryState = { failed: false };
 
-class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { hasError: false, error: null };
+  static getDerivedStateFromError(): ErrorBoundaryState {
+    return { failed: true };
   }
 
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Application render failure', error, errorInfo);
   }
 
   render() {
-    if (this.state.hasError) {
-      return (
-        <div className="flex items-center justify-center min-h-screen p-8 bg-background">
-          <div className="flex flex-col items-center w-full max-w-2xl p-8">
-            <AlertTriangle
-              size={48}
-              className="text-destructive mb-6 flex-shrink-0"
-            />
+    if (!this.state.failed) return this.props.children;
 
-            <h2 className="text-xl mb-4">An unexpected error occurred.</h2>
-
-            <div className="p-4 w-full rounded bg-muted overflow-auto mb-6">
-              <pre className="text-sm text-muted-foreground whitespace-break-spaces">
-                {this.state.error?.stack}
-              </pre>
-            </div>
-
-            <button
-              onClick={() => window.location.reload()}
-              className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-lg",
-                "bg-primary text-primary-foreground",
-                "hover:opacity-90 cursor-pointer"
-              )}
-            >
-              <RotateCcw size={16} />
-              Reload Page
-            </button>
-          </div>
-        </div>
-      );
-    }
-
-    return this.props.children;
+    return (
+      <Stack sx={{ minHeight: '100vh', alignItems: 'center', justifyContent: 'center', p: 3 }}>
+        <Paper sx={{ width: 'min(100%, 520px)', p: { xs: 3, sm: 5 }, textAlign: 'center' }}>
+          <ErrorOutlineRounded color="primary" sx={{ fontSize: 54, mb: 2 }} />
+          <Typography variant="h4" gutterBottom>
+            This view is temporarily unavailable
+          </Typography>
+          <Typography color="text.secondary" sx={{ mb: 3 }}>
+            Your saved account and watchlist data remain in this browser. Reload the application to restore the market view.
+          </Typography>
+          <Button variant="contained" onClick={() => window.location.reload()}>
+            Reload application
+          </Button>
+        </Paper>
+      </Stack>
+    );
   }
 }
-
-export default ErrorBoundary;

@@ -4,7 +4,7 @@ import { formatCurrency, formatNumber, formatPercentage, stripHtml } from './for
 describe('financial format helpers', () => {
   it('formats currency for exact and compact market values', () => {
     expect(formatCurrency(80_000)).toContain('$80,000');
-    expect(formatCurrency(1_600_000_000_000, true)).toBe('$1.60T');
+    expect(formatCurrency(1_600_000_000_000, true)).toBe('$1.6T');
     expect(formatCurrency(null)).toBe('—');
   });
 

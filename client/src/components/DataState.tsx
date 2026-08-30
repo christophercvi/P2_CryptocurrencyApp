@@ -12,12 +12,57 @@ import type { MarketApiError } from '@/types';
 
 export function MarketTableSkeleton() {
   return (
-    <Card>
-      <CardContent>
-        <Stack spacing={1.35}>
-          <Skeleton variant="rounded" height={42} />
+    <Card aria-label="Loading market table">
+      <CardContent sx={{ p: { xs: 1.5, sm: 2 } }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'minmax(280px,1fr) 170px 240px' }, gap: 1, mb: 2 }}>
+          <Skeleton variant="rounded" height={40} />
+          <Skeleton variant="rounded" height={40} />
+          <Skeleton variant="rounded" height={40} />
+        </Box>
+        <Box
+          sx={{
+            display: { xs: 'none', md: 'grid' },
+            gridTemplateColumns: '56px minmax(180px,1fr) 130px 100px 150px 120px 90px',
+            gap: 1.5,
+            px: 1.25,
+            pb: 1,
+            borderBottom: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          {['Rank', 'Asset', 'Price', '24h', 'Market cap', '7d trend', 'Watchlist'].map((label) => (
+            <Typography key={label} variant="caption" color="text.secondary" sx={{ fontWeight: 800 }}>{label}</Typography>
+          ))}
+        </Box>
+        <Stack spacing={0}>
           {Array.from({ length: 7 }, (_, index) => (
-            <Skeleton key={index} variant="rounded" height={48} />
+            <Box
+              key={index}
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '30px minmax(120px,1fr) 96px', md: '56px minmax(180px,1fr) 130px 100px 150px 120px 90px' },
+                gap: 1.5,
+                alignItems: 'center',
+                minHeight: 54,
+                px: 1.25,
+                borderBottom: index === 6 ? 0 : '1px solid',
+                borderColor: 'divider',
+              }}
+            >
+              <Skeleton variant="text" width={18} />
+              <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+                <Skeleton variant="circular" width={28} height={28} />
+                <Box sx={{ minWidth: 70, flex: 1 }}>
+                  <Skeleton variant="text" width="58%" />
+                  <Skeleton variant="text" width="28%" />
+                </Box>
+              </Stack>
+              <Skeleton variant="text" width="70%" />
+              <Skeleton variant="text" width="62%" sx={{ display: { xs: 'none', md: 'block' } }} />
+              <Skeleton variant="text" width="72%" sx={{ display: { xs: 'none', md: 'block' } }} />
+              <Skeleton variant="rounded" height={22} sx={{ display: { xs: 'none', md: 'block' } }} />
+              <Skeleton variant="circular" width={24} height={24} sx={{ display: { xs: 'none', md: 'block' }, justifySelf: 'center' }} />
+            </Box>
           ))}
         </Stack>
       </CardContent>
@@ -31,7 +76,7 @@ export function DataError({ error, onRetry, compact = false }: { error: MarketAp
       <CardContent sx={{ p: compact ? 2.5 : 4, textAlign: 'center' }}>
         <Box
           component="img"
-          src="/manus-storage/cryptocurrencyapp-data-state_3f9dbb2f.png"
+          src="/assets/cryptocurrencyapp-data-state.webp"
           alt="Data connection unavailable"
           sx={{ width: compact ? 132 : 190, maxWidth: '62%', mb: 1.5 }}
         />

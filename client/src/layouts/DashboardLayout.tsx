@@ -236,7 +236,19 @@ export function DashboardLayout() {
         {navList}
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, width: { md: `calc(100% - ${drawerWidth}px)` }, minWidth: 0 }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          minWidth: 0,
+          minHeight: '100vh',
+          backgroundImage: mode === 'dark'
+            ? 'radial-gradient(circle at 84% 8%, rgba(91,124,250,0.10), transparent 32%), linear-gradient(rgba(91,124,250,0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(91,124,250,0.022) 1px, transparent 1px)'
+            : 'radial-gradient(circle at 84% 8%, rgba(91,124,250,0.09), transparent 32%), linear-gradient(rgba(58,78,150,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(58,78,150,0.025) 1px, transparent 1px)',
+          backgroundSize: 'auto, 32px 32px, 32px 32px',
+        }}
+      >
         <Toolbar sx={{ minHeight: { xs: 64, md: 68 } }} />
         <Outlet />
       </Box>

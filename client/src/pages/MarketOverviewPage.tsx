@@ -37,7 +37,7 @@ export function MarketOverviewPage() {
           gridTemplateColumns: { xs: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(4, minmax(0, 1fr))' },
           gap: { xs: 1, sm: 1.5 },
           mb: 1.5,
-          backgroundImage: 'url(/manus-storage/cryptocurrencyapp-market-texture_41f945fc.jpg)',
+          backgroundImage: 'url(/assets/cryptocurrencyapp-market-texture.webp)',
           backgroundSize: 'cover',
           borderRadius: 2.5,
           p: { xs: 0.5, sm: 0.75 },

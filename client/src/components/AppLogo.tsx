@@ -33,7 +33,7 @@ export function AppLogo({ compact = false, inverse = false }: AppLogoProps) {
       >
         <Box
           component="img"
-          src="/manus-storage/cryptocurrencyapp-logo_31524350.png"
+          src="/assets/cryptocurrencyapp-logo.png"
           alt=""
           onError={(event) => {
             event.currentTarget.style.display = 'none';

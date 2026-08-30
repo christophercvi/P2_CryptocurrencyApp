@@ -29,7 +29,7 @@ export function AuthLayout() {
               p: 5,
               minHeight: 700,
               backgroundImage:
-                'linear-gradient(90deg, rgba(7,17,31,0.20), rgba(7,17,31,0.58)), url(/manus-storage/cryptocurrencyapp-auth-hero_23ee93b8.jpg)',
+                'linear-gradient(90deg, rgba(7,17,31,0.20), rgba(7,17,31,0.58)), url(/assets/cryptocurrencyapp-auth-hero.webp)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}

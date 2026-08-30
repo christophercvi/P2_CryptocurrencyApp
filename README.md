@@ -7,7 +7,7 @@ CryptocurrencyApp is a responsive cryptocurrency market-intelligence interface b
 ## Project Team
 
 | Team member | Name |
-| --- | --- | --- |
+| --- | --- |
 | Member 1 — Team Lead | `Christopher Chan Vi` |
 | Member 2 | `Samuel Cheng` |
 | Member 3 | `Anmoldeep Sandhu` |
